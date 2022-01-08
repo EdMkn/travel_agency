@@ -1,6 +1,6 @@
 package fr.lernejo.travelsite;
 
-import fr.lernejo.travelsite.utils.PredictionEngineClient;
+import fr.lernejo.travelsite.controllers.PredictionEngineClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

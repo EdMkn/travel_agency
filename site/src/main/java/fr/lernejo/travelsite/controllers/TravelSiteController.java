@@ -10,6 +10,7 @@ import fr.lernejo.travelsite.models.Traveler;
 import fr.lernejo.travelsite.Services.TravelerRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping(value = "/api")
@@ -19,8 +20,10 @@ public class TravelSiteController {
     private final TravelerRepository travelerRepository = new TravelerRepository();
     private final DestinationRepository destinationRepository = new DestinationRepository();
     private final Temperature_LandRepository temperature_landRepository = new Temperature_LandRepository();
+
     public TravelSiteController() {
     }
+
         @PostMapping(path = "/inscription")
     public void inscription(@RequestBody Traveler traveler){
         travelerRepository.recordTraveler(traveler);
@@ -29,9 +32,20 @@ public class TravelSiteController {
     @GetMapping(path = "/travels")
     public List<Destination> destinationsForTraveler(@RequestParam String userName) {
         //destinationList pour le moment on s'en occupe plus tard
-         List<Destination> destinationList = destinationRepository.getDestinationList();
-
+         List<Destination> destinationList = new ArrayList<>();
         Traveler traveler = travelerRepository.findTraveler(userName);
+        Destination travelerCountry = destinationRepository.findDestination(traveler.userCountry());
+         for(Destination dest: destinationRepository.getDestinationList() ){
+             if((traveler.weatherExpectation().theweather.equals("WARMER")) &&
+                (dest.temperature() >= travelerCountry.temperature() + traveler.minimumTemperatureDistance()))
+                 destinationList.add(dest);
+             else if ((traveler.weatherExpectation().theweather.equals("COLDER")) &&
+                 (dest.temperature() <= travelerCountry.temperature() - traveler.minimumTemperatureDistance()))
+                 destinationList.add(dest);
+
+         }
+
+
         return destinationList;
     }
 
