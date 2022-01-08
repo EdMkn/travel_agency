@@ -5,14 +5,19 @@ import fr.lernejo.travelsite.models.Destination;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DestinationRepository {
     private final List<Destination> destinationList;
+    private final TemperatureService temperatureService;
 
     public DestinationRepository(){
         destinationList = new ArrayList<>();
-        destinationList.add(new Destination("Espagne",32.1));
-        destinationList.add(new Destination("Portugal",10.1));
+        temperatureService= new TemperatureService();
+
+        for(String country:temperatureService.getCountries()){
+            destinationList.add(new Destination(country,temperatureService.getAvgTemperature(country)));
+        }
     }
     public Destination findDestination(String country) {
         for (Destination destination: destinationList)

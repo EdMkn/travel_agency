@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TravelerRepository {
-    public final List<Traveler> travelerList;
+    private final List<Traveler> travelerList;
 
     public TravelerRepository(){
         travelerList = new ArrayList<>();

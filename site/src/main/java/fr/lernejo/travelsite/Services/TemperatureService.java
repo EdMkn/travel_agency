@@ -6,10 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,6 +24,15 @@ public class TemperatureService {
             .skip(1)
             .map(TemperatureGenerationData::parseCsv)
             .collect(Collectors.toMap(v -> new CaseInsensitiveString(v.country()), Function.identity()));
+    }
+
+    List<String> getCountries(){
+        List<String> tab = new ArrayList<>();
+        temperatureDatasByCountry.forEach((key, value) -> tab.add(key.value));
+        return tab;
+    }
+    int getAvgTemperature(String country){
+        return temperatureDatasByCountry.get(new CaseInsensitiveString(country)).avg;
     }
 
     public double getTemperature(String country) throws UnknownCountryException {

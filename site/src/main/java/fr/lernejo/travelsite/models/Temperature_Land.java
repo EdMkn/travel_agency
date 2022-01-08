@@ -1,12 +1,9 @@
 package fr.lernejo.travelsite.models;
 
 import java.util.Date;
+import java.util.List;
 
-public record Temperature_Land (String country, Date date, double temperature){
-    
-    @Override
-    public String toString(){
-        return temperature + "°C"+ date +"at"+country;
-    }
+public record Temperature_Land (String country, List<TemperatureDate> temperatures){
+
 }
 
