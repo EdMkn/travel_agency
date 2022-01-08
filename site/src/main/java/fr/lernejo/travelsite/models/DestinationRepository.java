@@ -13,7 +13,7 @@ public class DestinationRepository {
         destinationList.add(new Destination("Espagne",32.1));
         destinationList.add(new Destination("Portugal",10.1));
     }
-    public Destination findDestination(String country) throws DestinationNotFoundException {
+    public Destination findDestination(String country) {
         for (Destination destination: destinationList)
             if(destination.country().equals(country))
                 return destination;

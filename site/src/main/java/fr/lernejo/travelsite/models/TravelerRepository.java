@@ -16,7 +16,7 @@ public class TravelerRepository {
         travelerList.add(traveler);
     }
     List<Traveler> getTravelerList(){return travelerList;}
-    public Traveler findTraveler(String userName) throws TravelerNotFoundException {
+    public Traveler findTraveler(String userName){
         for(Traveler traveler : travelerList)
             if(traveler.userName().equals(userName))
                 return traveler;
