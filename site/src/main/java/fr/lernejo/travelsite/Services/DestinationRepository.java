@@ -1,6 +1,7 @@
-package fr.lernejo.travelsite.models;
+package fr.lernejo.travelsite.Services;
 
 import fr.lernejo.travelsite.Exceptions.DestinationNotFoundException;
+import fr.lernejo.travelsite.models.Destination;
 
 import java.util.ArrayList;
 import java.util.List;

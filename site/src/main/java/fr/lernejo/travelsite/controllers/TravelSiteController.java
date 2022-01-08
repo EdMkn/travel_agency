@@ -2,15 +2,12 @@ package fr.lernejo.travelsite.controllers;
 
 import fr.lernejo.travelsite.Exceptions.TravelerNotFoundException;
 import fr.lernejo.travelsite.models.Destination;
-import fr.lernejo.travelsite.models.DestinationRepository;
+import fr.lernejo.travelsite.Services.DestinationRepository;
 import fr.lernejo.travelsite.models.Traveler;
-import fr.lernejo.travelsite.models.TravelerRepository;
+import fr.lernejo.travelsite.Services.TravelerRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 @RequestMapping(value = "/api")
 @RestController
@@ -33,5 +30,6 @@ public class TravelSiteController {
         Traveler traveler = travelerRepository.findTraveler(userName);
         return destinationList;
     }
+
 
 }

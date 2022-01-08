@@ -1,4 +1,4 @@
-package fr.lernejo.travelsite.models;
+package fr.lernejo.travelsite.Services;
 
 import fr.lernejo.travelsite.Exceptions.TravelerNotFoundException;
 import fr.lernejo.travelsite.models.Traveler;
