@@ -21,10 +21,8 @@ public class TravelSiteController {
     private final DestinationRepository destinationRepository = new DestinationRepository();
     private final Temperature_LandRepository temperature_landRepository = new Temperature_LandRepository();
 
-    public TravelSiteController() {
-    }
-
-        @PostMapping(path = "/inscription")
+    public TravelSiteController() {}
+    @PostMapping(path = "/inscription")
     public void inscription(@RequestBody Traveler traveler){
         travelerRepository.recordTraveler(traveler);
     }
@@ -32,23 +30,17 @@ public class TravelSiteController {
     @GetMapping(path = "/travels")
     public List<Destination> destinationsForTraveler(@RequestParam String userName) {
         //destinationList pour le moment on s'en occupe plus tard
-         List<Destination> destinationList = new ArrayList<>();
+        List<Destination> destinationList = new ArrayList<>();
         Traveler traveler = travelerRepository.findTraveler(userName);
         Destination travelerCountry = destinationRepository.findDestination(traveler.userCountry());
          for(Destination dest: destinationRepository.getDestinationList() ){
-             if((traveler.weatherExpectation().theweather.equals("WARMER")) &&
-                (dest.temperature() >= travelerCountry.temperature() + traveler.minimumTemperatureDistance()))
+             if((traveler.weatherExpectation().theweather.equals("WARMER")) && (dest.temperature() >= travelerCountry.temperature() + traveler.minimumTemperatureDistance()))
                  destinationList.add(dest);
-             else if ((traveler.weatherExpectation().theweather.equals("COLDER")) &&
-                 (dest.temperature() <= travelerCountry.temperature() - traveler.minimumTemperatureDistance()))
+             else if ((traveler.weatherExpectation().theweather.equals("COLDER")) && (dest.temperature() <= travelerCountry.temperature() - traveler.minimumTemperatureDistance()))
                  destinationList.add(dest);
-
          }
-
-
         return destinationList;
     }
-
     @GetMapping (path="/temperatures")
     public Temperature_Land TemperaturesPerDestination(@RequestParam String country){
         return temperature_landRepository.getLastTemperatures(country);
