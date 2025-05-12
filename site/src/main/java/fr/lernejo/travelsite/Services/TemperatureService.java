@@ -1,16 +1,29 @@
 package fr.lernejo.travelsite.Services;
 
-import fr.lernejo.travelsite.Exceptions.UnknownCountryException;
-import fr.lernejo.travelsite.utils.ClassPathFileLoader;
-import org.springframework.stereotype.Component;
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.stereotype.Component;
+
+import fr.lernejo.travelsite.Exceptions.UnknownCountryException;
+import fr.lernejo.travelsite.utils.ClassPathFileLoader;
+
+/**
+ * A class that provides services in relation to temperature:
+ * - it allows to get a list of countries 
+ * - it calculatesthe average teloerature of a country
+ * - It can generate believable temperatures
+ *  
+ */
 @Component
 public class TemperatureService {
 
@@ -49,7 +62,8 @@ public class TemperatureService {
         double delta = ((double) random.nextInt(data.variance() * 2 * 100)) / 100 - data.variance();
         return Double.parseDouble(df.format(avg + delta));
     }
-
+    
+   
     record TemperatureGenerationData(String country, int avg, int variance) {
         public static TemperatureGenerationData parseCsv(String csvLine) {
             String[] split = csvLine.split(";");

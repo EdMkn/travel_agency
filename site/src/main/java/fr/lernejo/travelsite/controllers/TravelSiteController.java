@@ -1,18 +1,26 @@
 package fr.lernejo.travelsite.controllers;
 
-import fr.lernejo.travelsite.Exceptions.TravelerNotFoundException;
-import fr.lernejo.travelsite.Services.TemperatureService;
-import fr.lernejo.travelsite.Services.Temperature_LandRepository;
-import fr.lernejo.travelsite.models.Destination;
-import fr.lernejo.travelsite.Services.DestinationRepository;
-import fr.lernejo.travelsite.models.Temperature_Land;
-import fr.lernejo.travelsite.models.Traveler;
-import fr.lernejo.travelsite.Services.TravelerRepository;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import fr.lernejo.travelsite.Services.DestinationRepository;
+import fr.lernejo.travelsite.Services.Temperature_LandRepository;
+import fr.lernejo.travelsite.Services.TravelerRepository;
+import fr.lernejo.travelsite.models.Destination;
+import fr.lernejo.travelsite.models.Temperature_Land;
+import fr.lernejo.travelsite.models.Traveler;
+
+/**
+ * Controller for the travel site
+ */
 @RequestMapping(value = "/api")
 @RestController
 public class TravelSiteController {
@@ -26,6 +34,10 @@ public class TravelSiteController {
     public void inscription(@RequestBody Traveler traveler){
         travelerRepository.recordTraveler(traveler);
     }
+    /**
+     * returns a list of potential destinations for the traveler
+     * @param userName the username of the traveler
+     */
     @ResponseBody
     @GetMapping(path = "/travels")
     public List<Destination> destinationsForTraveler(@RequestParam String userName) {
@@ -41,6 +53,7 @@ public class TravelSiteController {
          }
         return destinationList;
     }
+    /** returns a list of temperatures that a country has on certain days */
     @GetMapping (path="/temperatures")
     public Temperature_Land TemperaturesPerDestination(@RequestParam String country){
         return temperature_landRepository.getLastTemperatures(country);

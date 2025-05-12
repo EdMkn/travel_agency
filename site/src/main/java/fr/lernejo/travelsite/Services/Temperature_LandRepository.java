@@ -1,15 +1,16 @@
 package fr.lernejo.travelsite.Services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import fr.lernejo.travelsite.Exceptions.DestinationNotFoundException;
 import fr.lernejo.travelsite.models.TemperatureDate;
 import fr.lernejo.travelsite.models.Temperature_Land;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
+/**
+ * 
+ */
 public class Temperature_LandRepository {
     private final List<Temperature_Land> listTemperatureLand;
     private final TemperatureService temperatureService = new TemperatureService();
